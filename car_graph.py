@@ -2,6 +2,7 @@ from car import Car, car_subcategory
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+
 class CarGraph:
 
     def __init__(self):
@@ -20,50 +21,50 @@ class CarGraph:
 
     def city_mpg_graph(self):
         """Create cityway and stroke correlation"""
-        ax = sns.relplot(data = self.c_df, x = "stroke", y = "citympg", sizes = 80)
-        ax.set(xlabel ='Stroke (Litre)', ylabel ='City mpg') 
-        plt.title(f'City mpg and stroke correlation of {self.brand} car') 
+        ax = sns.relplot(data=self.c_df, x="stroke", y="citympg", sizes=80)
+        ax.set(xlabel='Stroke (Litre)', ylabel='City mpg')
+        plt.title(f'City mpg and stroke correlation of {self.brand} car')
         plt.show()
 
     def highway_mpg_graph(self):
         """Create highway and stroke correlation"""
-        ax = sns.relplot(data = self.c_df, x = "stroke", y = "highwaympg", sizes = 80)
-        ax.set(xlabel ='Stroke (Litre)', ylabel ='Highway mpg') 
-        plt.title(f'Highway mpg and stroke correlation of {self.brand} car') 
+        ax = sns.relplot(data=self.c_df, x="stroke", y="highwaympg", sizes=80)
+        ax.set(xlabel='Stroke (Litre)', ylabel='Highway mpg')
+        plt.title(f'Highway mpg and stroke correlation of {self.brand} car')
         plt.show()
-    
+
     def price_hist(self):
         """Create histogram for price"""
         ax = self.c_df["price"].hist()
-        ax.set(xlabel ='Price ($)', ylabel ='Frequency')
-        plt.title(f'Histogram of {self.brand} car price') 
+        ax.set(xlabel='Price ($)', ylabel='Frequency')
+        plt.title(f'Histogram of {self.brand} car price')
         plt.show()
 
     def price_box(self):
         """Create boxplot for price"""
         ax = sns.boxplot(x='price', data=self.c_df)
-        plt.title(f'Distribution of {self.brand} car price') 
+        plt.title(f'Distribution of {self.brand} car price')
         plt.show()
 
     def pie_rpm(self):
         """Create peak rpm pie chart"""
-        color_arr = ['r', 'b', 'c', 'm', 'springgreen','g','orange','navy']
+        color_arr = ['r', 'b', 'c', 'm', 'springgreen', 'g', 'orange', 'navy']
         peakrpm = self.c_df["peakrpm"].unique()
         x = self.c_df.groupby(["peakrpm"]).count()
         fig, ax = plt.subplots()
         ax.pie(x["price"], labels=peakrpm, colors=color_arr,
-            startangle=90, counterclock=False,
-            autopct='%1.1f%%')
+               startangle=90, counterclock=False,
+               autopct='%1.1f%%')
         ax.axis('equal')
         ax.set_title(f'Percentage of peak rpm for {self.brand} cars')
         plt.show()
-    
+
     def bar_horsepower(self):
         """Create bar chart for horsepower"""
         fig, ax = plt.subplots()
         y = self.c_df["horsepower"]
         x = self.c_df["CarName"]
-        ax.bar(x, y, color = "orange")
+        ax.bar(x, y, color="orange")
         ax.set_xlabel('Car models')
         ax.set_ylabel('Horsepower')
         ax.set_title(f'Horsepower bar chart for {self.brand} cars')
@@ -71,7 +72,8 @@ class CarGraph:
 
     def stackbar_dimensions(self):
         """Create stack bar chart for dimensions"""
-        dimensions_agg = self.c_df.groupby(["CarName"]).agg(carwidth=("carwidth", "mean"),carlength=("carlength", "mean"),carheight=("carheight", "mean"))
+        dimensions_agg = self.c_df.groupby(["CarName"]).agg(carwidth=(
+            "carwidth", "mean"), carlength=("carlength", "mean"), carheight=("carheight", "mean"))
         fig, ax = plt.subplots()
         color_arr = ["orange", "c", "m"]
         dimensions_agg.plot(kind='bar', stacked=True, color=color_arr, ax=ax)
@@ -80,7 +82,6 @@ class CarGraph:
         ax.set_title(f'Stack bar chart of {self.brand} car dimensions')
         ax.legend(title='Car dimensions')
         plt.show()
-    
 
 
 if __name__ == '__main__':

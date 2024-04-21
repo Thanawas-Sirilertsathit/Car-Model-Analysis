@@ -1,6 +1,7 @@
 from cardata import CarData
 import pandas as pd
 
+
 class Car:
     def __init__(self):
         """Initialize the car data"""
@@ -15,7 +16,7 @@ class Car:
         if not hasattr(cls, 'instance'):
             cls.instance = super(Car, cls).__new__(cls)
         return cls.instance
-    
+
     def reset_df(self):
         """Reset the current dataframe to the original one"""
         self.current_df = self.df.copy()
@@ -33,7 +34,7 @@ class Car:
             return self.current_df
         else:
             raise ValueError("Unexpected brand!")
-    
+
     def brand_list_init(self):
         """Initialize brand list"""
         self.brand_list.clear()
@@ -49,7 +50,7 @@ class Car:
         self.brand_list.append("")
 
     def aspiration_filter(self, asp):
-        """Filter current dataframe using aspiration and output the current dataframe"""        
+        """Filter current dataframe using aspiration and output the current dataframe"""
         if asp == "Default":
             return self.current_df
         elif asp == "Standard":
@@ -60,7 +61,7 @@ class Car:
             return self.current_df
         else:
             raise ValueError("Aspiration is not Default, Standard or Turbo")
-        
+
     def door_filter(self, asp):
         """Filter current dataframe using door number and output the current dataframe"""
         if asp == "Default":
@@ -73,7 +74,7 @@ class Car:
             return self.current_df
         else:
             raise ValueError("Door number is not Default, 2 doors or 4 doors")
-        
+
     def fuel_filter(self, asp):
         """Filter current dataframe using fuel type and output the current dataframe"""
         if asp == "Default":
@@ -86,7 +87,7 @@ class Car:
             return self.current_df
         else:
             raise ValueError("Fuel type is not Default, gas or diesel")
-    
+
     def car_body_filter(self, carbody):
         """Filter current dataframe using car body and output the current dataframe"""
         carbody = carbody.lower()
@@ -98,6 +99,7 @@ class Car:
             return self.current_df
         else:
             raise ValueError("Car body is not valid")
+
 
 def car_subcategory(brand, aspiration, door_num, fueltype, car_body):
     """Function to filter multiple options of car
@@ -116,9 +118,9 @@ def car_subcategory(brand, aspiration, door_num, fueltype, car_body):
     carbody = car.car_body_filter(car_body)
     return carbody
 
+
 if __name__ == '__main__':
     toyota = car_subcategory("Toyota", "Standard", "2 doors", "Gas", "Default")
     print(toyota)
     honda = car_subcategory("Honda", "Standard", "4 doors", "Gas", "Sedan")
     print(honda)
-    
