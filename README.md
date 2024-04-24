@@ -1,10 +1,11 @@
 # Car Model Analysis
 Car Model Analysis which analyzes car models for customers in car showroom and motor show.
-This program will provide the users insight of the private fuel cars to compare the capabilities.
+This program will provide the users with insight into private fuel cars to compare the capabilities.
+Users can create graphs in this program to find out the distribution of each attribute for each car model.
 
 # Installation
 Requirements
-- Python version 3.9 or higher version
+- Python version 3.9 or higher
 - Tkinter module
 - Matplotlib module
 - Seaborn module
