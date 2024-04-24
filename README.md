@@ -4,7 +4,7 @@ This program will provide the users insight of the private fuel cars to compare 
 
 # Installation
 Requirements
-- Python version 3.9 or newer version
+- Python version 3.9 or higher version
 - Tkinter module
 - Matplotlib module
 - Seaborn module
