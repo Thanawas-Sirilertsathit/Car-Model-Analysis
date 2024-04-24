@@ -1,11 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 import seaborn as sns
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from car import Car, car_subcategory
 from car_graph import CarGraph
 from pygame import mixer
+from car_describe import describe
 
 
 class CarGUI(tk.Tk):
@@ -14,18 +16,19 @@ class CarGUI(tk.Tk):
     def __init__(self, car: Car):
         """Initialize components and variables"""
         super().__init__()
+        self.corr_coef = -999
         self.car = car
         self.car_graph = CarGraph()
         self.controller = CarController()
         self.title("Car Model Analysis")
         self.brand_var = tk.StringVar()
         self.carbody_var = tk.StringVar()
-        self.optiondisplay = {"padx": 3, "pady": 3, "font": (
-            "Arial", 15), "background": "black", "foreground": "yellow"}
-        self.optiondisplay1 = {"padx": 3, "pady": 3, "font": (
-            "Arial", 15), "background": "blue", "foreground": "pink"}
-        self.optiondisplay2 = {"padx": 3, "pady": 3, "font": (
-            "Arial", 15), "background": "orange", "foreground": "purple"}
+        self.optiondisplay = {"padx": 2, "pady": 2, "font": (
+            "Arial", 12), "background": "black", "foreground": "yellow"}
+        self.optiondisplay1 = {"padx": 2, "pady": 2, "font": (
+            "Arial", 12), "background": "blue", "foreground": "pink"}
+        self.optiondisplay2 = {"padx": 2, "pady": 2, "font": (
+            "Arial", 12), "background": "orange", "foreground": "purple"}
         mixer.init()
         self.init_components()
 
@@ -47,16 +50,19 @@ class CarGUI(tk.Tk):
         top_frame2 = self.category_button_frame()
         top_frame3 = self.graph_button_frame()
         canvas_frame = self.canvas_frame()
+        correl_frame = self.correlation_frame()
         top_frame1.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
         top_frame2.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
         top_frame3.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
-        canvas_frame.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
+        canvas_frame.pack(side=tk.TOP, expand=False, fill=tk.BOTH)
+        correl_frame.pack(side=tk.TOP, expand=False, fill=tk.BOTH)
         self.default_graph()
 
     def init_brand_and_carbody(self):
         """Initialize brand list and carbody list"""
         self.brands = list(self.car.brand_list.copy())
         self.brands.insert(0, "")
+        self.brands.pop()
         self.carbody_list = list(self.car.carbody_list.copy())
         self.carbody_list.insert(0, "")
 
@@ -66,6 +72,28 @@ class CarGUI(tk.Tk):
         graph_canvas = FigureCanvasTkAgg(graph, master=self.canvas)
         graph_canvas.draw()
         graph_canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        if self.corr_coef != -999:
+            correlation_text = f"Correlation Coefficient : {self.corr_coef:.2f}"
+            if self.corr_coef == 0:
+                correlation_text = correlation_text + "\n" +\
+                    "Two attributes not depend on each others"
+            elif self.corr_coef > 0:
+                correlation_text = correlation_text + "\n" +\
+                    "Two attributes increase and decrease in the same direction"
+            else:
+                correlation_text = correlation_text + "\n" +\
+                    "Two attributes increase and decrease in the opposite direction"
+            self.correlation_label.config(text=correlation_text)
+        else:
+            self.correlation_label.config(text="")
+
+    def correlation_frame(self):
+        """Create correlation frame"""
+        frame = tk.Frame()
+        self.correlation_label = tk.Label(
+            frame, text="", **self.optiondisplay1)
+        self.correlation_label.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+        return frame
 
     def clear_canvas(self):
         """Delete previous content in the canvas"""
@@ -144,7 +172,7 @@ class CarGUI(tk.Tk):
         peakrpm.bind("<Button>", self.graph_button_handler)
         self.price.bind("<Button>", self.graph_button_handler)
         self.mpg_score.bind("<Button>", self.graph_button_handler)
-        stat.bind("<Button>", self.graph_button_handler)
+        stat.bind("<Button>", self.stat_button_handler)
         return frame
 
     def canvas_frame(self):
@@ -156,20 +184,40 @@ class CarGUI(tk.Tk):
     def graph_button_handler(self, event=tk.Event):
         """Event handler for graph buttons"""
         widget = event.widget
-        result_graph = self.controller.graph(widget["text"])  # to be added
-        self.display_graph(result_graph)
+        self.corr_coef = -999
+        result_graph = self.controller.graph(widget["text"])
         if widget["text"] == "Price (Box)":
             self.price.config(text="Price (Hist)", bg="Purple")
         elif widget["text"] == "Price (Hist)":
             self.price.config(text="Price (Box)", bg="Magenta")
         elif widget["text"] == "Mpg scores and strokes (City)":
+            self.corr_coef = np.corrcoef(
+                self.controller.current_df["stroke"], self.controller.current_df["citympg"])[0, 1]
             self.mpg_score.config(
                 text="Mpg scores and strokes (Highway)", bg="Purple")
+            self.corr_coef = round(self.corr_coef, 2)
         elif widget["text"] == "Mpg scores and strokes (Highway)":
+            self.corr_coef = np.corrcoef(
+                self.controller.current_df["stroke"], self.controller.current_df["highwaympg"])[0, 1]
             self.mpg_score.config(
                 text="Mpg scores and strokes (City)", bg="Magenta")
+            self.corr_coef = round(self.corr_coef, 2)
         else:
             widget.config(bg="Green")
+        self.display_graph(result_graph)
+
+    def stat_button_handler(self, event=tk.Event):
+        widget = event.widget
+        widget.config(bg="Green")
+        stat = self.controller.stat()
+        self.clear_canvas()
+        stat_str = stat.to_string()
+        canvas_width = self.canvas.winfo_width()
+        canvas_height = self.canvas.winfo_height()
+        center_x = canvas_width / 2
+        center_y = canvas_height / 2
+        self.canvas.create_text(
+            center_x, center_y, anchor="center", text=stat_str, font=("Arial", 15))
 
     def category_button_handler(self, event=tk.Event):
         """Event handler for category buttons"""
@@ -281,3 +329,6 @@ class CarController:
                 return self.car_graph.city_mpg_graph()
             elif text == "Statistics":
                 pass
+
+    def stat(self):
+        return describe()

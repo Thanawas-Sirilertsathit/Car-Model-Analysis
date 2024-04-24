@@ -6,7 +6,7 @@ def describe():
     """Descriptive statistics for horsepower, stroke, city mpg and highway mpg"""
     c = Car()
     desc = c.df[["horsepower", "stroke", "citympg", "highwaympg"]]
-    print(desc.describe())
+    return desc.describe()
 
 
 if __name__ == '__main__':
