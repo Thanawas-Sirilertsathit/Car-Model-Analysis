@@ -10,6 +10,7 @@ class Car:
         self.current_df = self.df.copy()
         self.brand_list = []
         self.brand_list_init()
+        self.carbody_list = self.df["carbody"].unique()
 
     def __new__(cls):
         """Make this class become a singleton class"""
@@ -91,8 +92,8 @@ class Car:
     def car_body_filter(self, carbody):
         """Filter current dataframe using car body and output the current dataframe"""
         carbody = carbody.lower()
-        carbody_list = self.df["carbody"].unique()
-        if carbody in carbody_list:
+        self.carbody_list = self.df["carbody"].unique()
+        if carbody in self.carbody_list:
             self.current_df = self.current_df[self.current_df["carbody"] == carbody]
             return self.current_df
         elif carbody == "" or carbody == "default":
