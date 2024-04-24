@@ -7,6 +7,7 @@ class Car:
         """Initialize the car data"""
         self.cardata = CarData()
         self.df = self.cardata.df
+        self.mpg_to_kpl()
         self.current_df = self.df.copy()
         self.brand_list = []
         self.brand_list_init()
@@ -17,6 +18,12 @@ class Car:
         if not hasattr(cls, 'instance'):
             cls.instance = super(Car, cls).__new__(cls)
         return cls.instance
+
+    def mpg_to_kpl(self):
+        """Convert miles per gallon (mpg) to kilometers per liter (kpl)"""
+        # Add new columns for city kpl and highway kpl
+        self.df['citykpl'] = self.df['citympg'] * 0.425143707
+        self.df['highwaykpl'] = self.df['highwaympg'] * 0.425143707
 
     def reset_df(self):
         """Reset the current dataframe to the original one"""

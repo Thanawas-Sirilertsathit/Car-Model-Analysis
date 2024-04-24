@@ -28,20 +28,38 @@ class CarGraph:
         """Create cityway and stroke correlation"""
         ax = sns.relplot(data=self.c_df, x="stroke", y="citympg", sizes=80)
         ax.set(xlabel='Stroke (Litre)', ylabel='City mpg')
-        plt.title(f'City mpg and stroke correlation of {self.brand} car')
+        plt.title(
+            f'City miles per gallon and stroke correlation of {self.brand} car')
+        return ax.fig
+
+    def city_kpl_graph(self):
+        """Create cityway and stroke correlation"""
+        ax = sns.relplot(data=self.c_df, x="stroke", y="citykpl", sizes=80)
+        ax.set(xlabel='Stroke (Litre)', ylabel='City kpl')
+        plt.title(
+            f'City km/l and stroke correlation of {self.brand} car')
         return ax.fig
 
     def highway_mpg_graph(self):
         """Create highway and stroke correlation"""
         ax = sns.relplot(data=self.c_df, x="stroke", y="highwaympg", sizes=80)
         ax.set(xlabel='Stroke (Litre)', ylabel='Highway mpg')
-        plt.title(f'Highway mpg and stroke correlation of {self.brand} car')
+        plt.title(
+            f'Highway miles per gallon and stroke correlation of {self.brand} car')
+        return ax.fig
+
+    def highway_kpl_graph(self):
+        """Create highway and stroke correlation"""
+        ax = sns.relplot(data=self.c_df, x="stroke", y="highwaykpl", sizes=80)
+        ax.set(xlabel='Stroke (Litre)', ylabel='Highway kpl')
+        plt.title(
+            f'Highway km/l and stroke correlation of {self.brand} car')
         return ax.fig
 
     def price_hist(self):
         """Create histogram for price"""
         fig, ax = plt.subplots()  # Create a new figure
-        ax.hist(self.c_df["price"])
+        ax.hist(self.c_df["price"], color="skyblue")
         ax.set(xlabel='Price ($)', ylabel='Frequency')
         ax.set_title(f'Histogram of {self.brand} car price')
         return fig
@@ -49,7 +67,7 @@ class CarGraph:
     def price_box(self):
         """Create boxplot for price"""
         fig, ax = plt.subplots()  # Create a new figure
-        sns.boxplot(x='price', data=self.c_df, ax=ax)
+        sns.boxplot(x='price', data=self.c_df, ax=ax, color="salmon")
         ax.set_title(f'Distribution of {self.brand} car price')
         return fig
 
@@ -69,13 +87,14 @@ class CarGraph:
     def bar_horsepower(self):
         """Create bar chart for horsepower"""
         fig, ax = plt.subplots()
-        y = self.c_df["horsepower"]
-        x = self.c_df["CarName"]
-        ax.bar(x, y, color="orange")
-        ax.set_xlabel('Car models')
-        ax.set_ylabel('Horsepower')
+        x = self.c_df["horsepower"]
+        y = self.c_df["CarName"]
+        ax.barh(y, x, color="orange")
+        ax.set_ylabel('Car models')
+        ax.set_xlabel('Horsepower')
         ax.set_title(f'Horsepower bar chart for {self.brand} cars')
-        ax.set_ylim(bottom=0)
+        ax.set_xlim(left=0)
+        ax.invert_yaxis()
         return fig
 
     def stackbar_dimensions(self):
@@ -84,12 +103,12 @@ class CarGraph:
             "carwidth", "mean"), carlength=("carlength", "mean"), carheight=("carheight", "mean"))
         fig, ax = plt.subplots()
         color_arr = ["orange", "c", "m"]
-        dimensions_agg.plot(kind='bar', stacked=True, color=color_arr, ax=ax)
-        ax.set_xlabel('CarName')
-        ax.set_ylabel('Length (inch)')
+        dimensions_agg.plot(kind='barh', stacked=True, color=color_arr, ax=ax)
+        ax.set_xlabel('Length (inch)')
+        ax.set_ylabel('CarName')
         ax.set_title(f'Stack bar chart of {self.brand} car dimensions')
         ax.legend(title='Car dimensions')
-        ax.set_ylim(bottom=0)
+        ax.set_xlim(left=0)
         return fig
 
 

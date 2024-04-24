@@ -18,6 +18,7 @@ class CarGUI(tk.Tk):
         super().__init__()
         self.corr_coef = -999
         self.car = car
+        self.stat_text = None
         self.car_graph = CarGraph()
         self.controller = CarController()
         self.title("Car Model Analysis")
@@ -51,10 +52,10 @@ class CarGUI(tk.Tk):
         top_frame3 = self.graph_button_frame()
         canvas_frame = self.canvas_frame()
         correl_frame = self.correlation_frame()
-        top_frame1.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
-        top_frame2.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
-        top_frame3.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
-        canvas_frame.pack(side=tk.TOP, expand=False, fill=tk.BOTH)
+        top_frame1.pack(side=tk.TOP, expand=True, fill=tk.BOTH, pady=2)
+        top_frame2.pack(side=tk.TOP, expand=True, fill=tk.BOTH, pady=2)
+        top_frame3.pack(side=tk.TOP, expand=True, fill=tk.BOTH, pady=2)
+        canvas_frame.pack(side=tk.TOP, expand=False, fill=tk.BOTH, pady=2)
         correl_frame.pack(side=tk.TOP, expand=False, fill=tk.BOTH)
         self.default_graph()
 
@@ -96,9 +97,12 @@ class CarGUI(tk.Tk):
         return frame
 
     def clear_canvas(self):
-        """Delete previous content in the canvas"""
+        """Delete previous content in the canvas include the text"""
         for widget in self.canvas.winfo_children():
             widget.destroy()
+        if self.stat_text is not None:
+            self.canvas.delete(self.stat_text)
+            self.stat_text = None
 
     def combobox_category_frame(self):
         """A frame that contains comboboxes"""
@@ -160,18 +164,22 @@ class CarGUI(tk.Tk):
         self.price = tk.Button(frame, text="Price (Box)", **self.optiondisplay)
         self.mpg_score = tk.Button(
             frame, text="Mpg scores and strokes (City)", **self.optiondisplay)
+        self.kpl_score = tk.Button(
+            frame, text="Km/l scores and strokes (City)", **self.optiondisplay)
         stat = tk.Button(frame, text="Statistics", **self.optiondisplay)
         dimensions.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         horsepower.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         peakrpm.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         self.price.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         self.mpg_score.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+        self.kpl_score.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         stat.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         dimensions.bind("<Button>", self.graph_button_handler)
         horsepower.bind("<Button>", self.graph_button_handler)
         peakrpm.bind("<Button>", self.graph_button_handler)
         self.price.bind("<Button>", self.graph_button_handler)
         self.mpg_score.bind("<Button>", self.graph_button_handler)
+        self.kpl_score.bind("<Button>", self.graph_button_handler)
         stat.bind("<Button>", self.stat_button_handler)
         return frame
 
@@ -201,6 +209,16 @@ class CarGUI(tk.Tk):
                 self.controller.current_df["stroke"], self.controller.current_df["highwaympg"])[0, 1]
             self.mpg_score.config(
                 text="Mpg scores and strokes (City)", bg="Magenta")
+        elif widget["text"] == "Km/l scores and strokes (Highway)":
+            self.corr_coef = np.corrcoef(
+                self.controller.current_df["stroke"], self.controller.current_df["highwaykpl"])[0, 1]
+            self.kpl_score.config(
+                text="Km/l scores and strokes (City)", bg="Magenta")
+        elif widget["text"] == "Km/l scores and strokes (City)":
+            self.corr_coef = np.corrcoef(
+                self.controller.current_df["stroke"], self.controller.current_df["highwaykpl"])[0, 1]
+            self.kpl_score.config(
+                text="Km/l scores and strokes (Highway)", bg="Purple")
             self.corr_coef = round(self.corr_coef, 2)
         else:
             widget.config(bg="Green")
@@ -210,13 +228,17 @@ class CarGUI(tk.Tk):
         widget = event.widget
         widget.config(bg="Green")
         stat = self.controller.stat()
+        self.display_statistics(stat)
+
+    def display_statistics(self, stat):
+        """Display statistics in the canvas"""
         self.clear_canvas()
         stat_str = stat.to_string()
         canvas_width = self.canvas.winfo_width()
         canvas_height = self.canvas.winfo_height()
         center_x = canvas_width / 2
         center_y = canvas_height / 2
-        self.canvas.create_text(
+        self.stat_text = self.canvas.create_text(
             center_x, center_y, anchor="center", text=stat_str, font=("Arial", 15))
 
     def category_button_handler(self, event=tk.Event):
@@ -308,8 +330,10 @@ class CarController:
                 return self.car_graph.highway_mpg_graph()
             elif text == "Mpg scores and strokes (City)":
                 return self.car_graph.city_mpg_graph()
-            elif text == "Statistics":
-                pass
+            elif text == "Km/l scores and strokes (City)":
+                return self.car_graph.city_kpl_graph()
+            elif text == "Km/l scores and strokes (Highway)":
+                return self.car_graph.highway_kpl_graph()
         except IndexError:
             self.current_df = self.car.df.copy()
             self.car_graph.c_df = self.current_df
@@ -327,8 +351,10 @@ class CarController:
                 return self.car_graph.highway_mpg_graph()
             elif text == "Mpg scores and strokes (City)":
                 return self.car_graph.city_mpg_graph()
-            elif text == "Statistics":
-                pass
+            elif text == "Km/l scores and strokes (City)":
+                return self.car_graph.city_kpl_graph()
+            elif text == "Km/l scores and strokes (Highway)":
+                return self.car_graph.highway_kpl_graph()
 
     def stat(self):
-        return describe()
+        return describe(self.current_df)
