@@ -118,15 +118,18 @@ class CarGUI(tk.Tk):
         self.brand_c.current(newindex=0)
         self.carbody_c.current(newindex=0)
         story = tk.Button(frame, text="Story", **self.optiondisplay)
+        quit = tk.Button(frame, text="Quit", **self.optiondisplay)
         brand_l.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         self.brand_c.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         carbody_l.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         self.carbody_c.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         story.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+        quit.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         self.carbody_c.bind("<<ComboboxSelected>>",
                             self.category_combo_handler)
         self.brand_c.bind("<<ComboboxSelected>>", self.category_combo_handler)
         story.bind("<Button>", self.story_handler)
+        quit.bind("<Button>", self.quit_handler)
         return frame
 
     def category_button_frame(self):
@@ -287,6 +290,9 @@ class CarGUI(tk.Tk):
     def story_handler(self, event=tk.Event):
         """Leading to another UI that is Storytelling page"""
         pass  # to be added
+
+        """Quit the program"""
+        self.quit()
 
     def run(self):
         """Run the program"""

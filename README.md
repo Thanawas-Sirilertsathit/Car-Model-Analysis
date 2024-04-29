@@ -3,10 +3,10 @@ Car Model Analysis which analyzes car models for customers in car showroom and m
 This program will provide the users with insight into private fuel cars to compare the capabilities.
 Users can create graphs in this program to find out the distribution of each attribute for each car model.
 
-# Installation
+# Installation and how to use
 Requirements
-- Python version 3.9 or higher
-- Tkinter module
+- Python version 3.9 or higher version
+- Tkinter library
 - Matplotlib module
 - Seaborn module
 - Pandas module
