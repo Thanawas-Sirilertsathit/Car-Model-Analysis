@@ -291,6 +291,7 @@ class CarGUI(tk.Tk):
         """Leading to another UI that is Storytelling page"""
         pass  # to be added
 
+    def quit_handler(self, event=tk.Event):
         """Quit the program"""
         self.quit()
 
