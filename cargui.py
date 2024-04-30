@@ -16,6 +16,7 @@ class CarGUI(tk.Tk):
     def __init__(self, car: Car):
         """Initialize components and variables"""
         super().__init__()
+        self.progress_bar = None
         self.corr_coef = -999
         self.car = car
         self.stat_text = None
@@ -52,11 +53,14 @@ class CarGUI(tk.Tk):
         top_frame3 = self.graph_button_frame()
         canvas_frame = self.canvas_frame()
         correl_frame = self.correlation_frame()
+        self.progress_frame = self.progress_bar_frame()
+        self.progress_frame.config(bg="green")
         top_frame1.pack(side=tk.TOP, expand=True, fill=tk.BOTH, pady=2)
         top_frame2.pack(side=tk.TOP, expand=True, fill=tk.BOTH, pady=2)
         top_frame3.pack(side=tk.TOP, expand=True, fill=tk.BOTH, pady=2)
         canvas_frame.pack(side=tk.TOP, expand=False, fill=tk.BOTH, pady=2)
         correl_frame.pack(side=tk.TOP, expand=False, fill=tk.BOTH)
+        self.progress_frame.pack(side=tk.TOP, expand=False, fill=tk.BOTH)
         self.default_graph()
 
     def init_brand_and_carbody(self):
@@ -87,6 +91,7 @@ class CarGUI(tk.Tk):
             self.correlation_label.config(text=correlation_text)
         else:
             self.correlation_label.config(text="")
+        self.hide_progress_bar()
 
     def correlation_frame(self):
         """Create correlation frame"""
@@ -95,6 +100,35 @@ class CarGUI(tk.Tk):
             frame, text="", **self.optiondisplay1)
         self.correlation_label.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         return frame
+
+    def progress_bar_frame(self):
+        """Create progress bar frame"""
+        frame = tk.Frame()
+        self.progress_bar = ttk.Progressbar(
+            frame, orient="horizontal", length=200, mode="determinate")
+        self.progress_label = tk.Label(
+            frame, text="Task done", **self.optiondisplay)
+        self.progress_label.pack(anchor="center")
+        self.progress_bar.pack(anchor="center")
+        return frame
+
+    def show_progress_bar(self):
+        """Show progress bar (Task is in progress)"""
+        if self.progress_bar is not None:
+            self.progress_bar.start(50)
+            self.progress_frame.config(bg="yellow")
+            self.progress_label.config(text="Task in progress")
+
+    def hide_progress_bar(self):
+        """Hide progress bar (Task done)"""
+        try:
+            if self.progress_bar.winfo_exists():
+                self.progress_bar.stop()
+                self.progress_frame.config(bg="green")
+                self.progress_label.config(text="Task done")
+        except:
+            self.progress_frame.config(bg="green")
+            self.progress_label.config(text="Task done")
 
     def clear_canvas(self):
         """Delete previous content in the canvas include the text"""
@@ -195,6 +229,8 @@ class CarGUI(tk.Tk):
     def graph_button_handler(self, event=tk.Event):
         """Event handler for graph buttons"""
         widget = event.widget
+        self.show_progress_bar()
+        self.after(5000, self.hide_progress_bar)
         self.corr_coef = -999
         result_graph = self.controller.graph(widget["text"])
         if widget["text"] == "Price (Box)":
