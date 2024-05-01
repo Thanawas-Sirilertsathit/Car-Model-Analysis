@@ -8,12 +8,13 @@ from car import Car, car_subcategory
 from car_graph import CarGraph
 from pygame import mixer
 from car_describe import describe
+from car_story import CarStoryGUI
 
 
 class CarGUI(tk.Tk):
     """Graphical user interface of Car model analysis"""
 
-    def __init__(self, car: Car):
+    def __init__(self, car: Car, controller):
         """Initialize components and variables"""
         super().__init__()
         self.progress_bar = None
@@ -21,7 +22,7 @@ class CarGUI(tk.Tk):
         self.car = car
         self.stat_text = None
         self.car_graph = CarGraph()
-        self.controller = CarController()
+        self.controller = controller
         self.title("Car Model Analysis")
         self.brand_var = tk.StringVar()
         self.carbody_var = tk.StringVar()
@@ -324,8 +325,11 @@ class CarGUI(tk.Tk):
             print(cdf)
 
     def story_handler(self, event=tk.Event):
-        """Leading to another UI that is Storytelling page"""
-        pass  # to be added
+        """Event handler for the story button"""
+        self.show_progress_bar()
+        self.after(5000, self.hide_progress_bar)
+        x = self.controller.story()
+        return x
 
     def quit_handler(self, event=tk.Event):
         """Quit the program"""
@@ -342,6 +346,7 @@ class CarController:
     def __init__(self):
         """Initialize car class"""
         self.car = Car()
+        # self.carstory = CarStoryGUI(self.car)
         self.car_graph = CarGraph()
         self.current_df = self.car.current_df
 
@@ -401,3 +406,8 @@ class CarController:
 
     def stat(self):
         return describe(self.current_df)
+
+    def story(self):
+        car = Car()
+        story_gui = CarStoryGUI(car)
+        story_gui.run()

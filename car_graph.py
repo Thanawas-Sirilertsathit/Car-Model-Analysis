@@ -10,6 +10,7 @@ class CarGraph:
         self.car = Car()
         self.c_df = self.car.current_df
         self.brand = ""
+        self.figsize = (2, 2)
 
     def car_category(self, brand, asp, num_door, fueltype, carbody):
         """Find car in giving categories"""
@@ -25,40 +26,44 @@ class CarGraph:
             plt.close(self.ax.figure)
 
     def city_mpg_graph(self):
-        """Create cityway and stroke correlation"""
-        ax = sns.relplot(data=self.c_df, x="stroke", y="citympg", sizes=80)
+        """Create citympg and stroke correlation"""
+        fig, ax = plt.subplots(figsize=self.figsize)
+        sns.scatterplot(data=self.c_df, x="stroke", y="citympg", ax=ax)
         ax.set(xlabel='Stroke (Litre)', ylabel='City mpg')
         plt.title(
             f'City miles per gallon and stroke correlation of {self.brand} car')
-        return ax.fig
+        return fig
 
     def city_kpl_graph(self):
-        """Create cityway and stroke correlation"""
-        ax = sns.relplot(data=self.c_df, x="stroke", y="citykpl", sizes=80)
+        """Create citykpl and stroke correlation"""
+        fig, ax = plt.subplots(figsize=self.figsize)
+        sns.scatterplot(data=self.c_df, x="stroke", y="citykpl", ax=ax)
         ax.set(xlabel='Stroke (Litre)', ylabel='City kpl')
         plt.title(
             f'City km/l and stroke correlation of {self.brand} car')
-        return ax.fig
+        return fig
 
     def highway_mpg_graph(self):
-        """Create highway and stroke correlation"""
-        ax = sns.relplot(data=self.c_df, x="stroke", y="highwaympg", sizes=80)
+        """Create highwaympg and stroke correlation"""
+        fig, ax = plt.subplots(figsize=self.figsize)
+        sns.scatterplot(data=self.c_df, x="stroke", y="highwaympg", ax=ax)
         ax.set(xlabel='Stroke (Litre)', ylabel='Highway mpg')
         plt.title(
             f'Highway miles per gallon and stroke correlation of {self.brand} car')
-        return ax.fig
+        return fig
 
     def highway_kpl_graph(self):
-        """Create highway and stroke correlation"""
-        ax = sns.relplot(data=self.c_df, x="stroke", y="highwaykpl", sizes=80)
+        """Create highwaykpl and stroke correlation"""
+        fig, ax = plt.subplots(figsize=self.figsize)
+        sns.scatterplot(data=self.c_df, x="stroke", y="highwaykpl", ax=ax)
         ax.set(xlabel='Stroke (Litre)', ylabel='Highway kpl')
         plt.title(
             f'Highway km/l and stroke correlation of {self.brand} car')
-        return ax.fig
+        return fig
 
     def price_hist(self):
         """Create histogram for price"""
-        fig, ax = plt.subplots()  # Create a new figure
+        fig, ax = plt.subplots(figsize=self.figsize)  # Create a new figure
         ax.hist(self.c_df["price"], color="skyblue")
         ax.set(xlabel='Price ($)', ylabel='Frequency')
         ax.set_title(f'Histogram of {self.brand} car price')
@@ -66,7 +71,7 @@ class CarGraph:
 
     def price_box(self):
         """Create boxplot for price"""
-        fig, ax = plt.subplots()  # Create a new figure
+        fig, ax = plt.subplots(figsize=self.figsize)  # Create a new figure
         sns.boxplot(x='price', data=self.c_df, ax=ax, color="salmon")
         ax.set_title(f'Distribution of {self.brand} car price')
         return fig
@@ -76,7 +81,7 @@ class CarGraph:
         color_arr = ['r', 'b', 'c', 'm', 'springgreen', 'g', 'orange', 'navy']
         peakrpm = self.c_df["peakrpm"].unique()
         x = self.c_df.groupby(["peakrpm"]).count()
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=self.figsize)
         ax.pie(x["price"], labels=peakrpm, colors=color_arr,
                startangle=90, counterclock=False,
                autopct='%1.1f%%')
@@ -86,7 +91,7 @@ class CarGraph:
 
     def bar_horsepower(self):
         """Create bar chart for horsepower"""
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=self.figsize)
         x = self.c_df["horsepower"]
         y = self.c_df["CarName"]
         ax.barh(y, x, color="orange")
@@ -101,7 +106,7 @@ class CarGraph:
         """Create stack bar chart for dimensions"""
         dimensions_agg = self.c_df.groupby(["CarName"]).agg(carwidth=(
             "carwidth", "mean"), carlength=("carlength", "mean"), carheight=("carheight", "mean"))
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=self.figsize)
         color_arr = ["orange", "c", "m"]
         dimensions_agg.plot(kind='barh', stacked=True, color=color_arr, ax=ax)
         ax.set_xlabel('Length (inch)')
