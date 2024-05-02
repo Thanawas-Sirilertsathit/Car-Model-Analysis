@@ -308,10 +308,12 @@ class CarGUI(tk.Tk):
         cdf = self.controller.select(
             self.brand_var.get(), self.aspiration_b["text"], self.numdoor_b["text"], self.fueltype_b["text"], self.carbody_var.get())
         if cdf.empty:
-            print("Dataframe contains nothing")
+            # print("Dataframe contains nothing")
             # self.play_sound_error()
+            pass
         else:
-            print(cdf)
+            # print(cdf)
+            pass
 
     def category_combo_handler(self, event=tk.Event):
         """Event handler for comboboxes"""
@@ -319,10 +321,12 @@ class CarGUI(tk.Tk):
         cdf = self.controller.select(
             self.brand_var.get(), self.aspiration_b["text"], self.numdoor_b["text"], self.fueltype_b["text"], self.carbody_var.get())
         if cdf.empty:
-            print("Dataframe contains nothing")
+            # print("Dataframe contains nothing")
             # self.play_sound_error()
+            pass
         else:
-            print(cdf)
+            # print(cdf)
+            pass
 
     def story_handler(self, event=tk.Event):
         """Event handler for the story button"""
@@ -332,8 +336,8 @@ class CarGUI(tk.Tk):
         return x
 
     def quit_handler(self, event=tk.Event):
-        """Quit the program"""
-        self.quit()
+        """Quit the program include the storytelling page"""
+        self.winfo_toplevel().destroy()
 
     def run(self):
         """Run the program"""

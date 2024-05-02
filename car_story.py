@@ -33,10 +33,12 @@ class CarStoryGUI(tk.Toplevel):
         top_frame1 = self.canvas_frame_top()
         lower_frame2 = self.canvas_frame_bottom()
         correl_frame3 = self.correlation_frame()
+        text_frame = self.text_frame()
         top_frame1.pack(side=tk.TOP, expand=True, fill=tk.BOTH, pady=2)
         lower_frame2.pack(side=tk.TOP, expand=True, fill=tk.BOTH, pady=2)
         correl_frame3.pack(side=tk.TOP, expand=True,
                            fill=tk.BOTH, pady=2)
+        text_frame.pack(side=tk.TOP, expand=True, fill=tk.BOTH, pady=2)
         self.setup_graph()
 
     def display_graph(self, graph, canvas):
@@ -89,12 +91,19 @@ class CarStoryGUI(tk.Toplevel):
         frame = tk.Frame(self)
         self.canvas4 = tk.Canvas(frame, bg="white")
         self.canvas5 = tk.Canvas(frame, bg="white")
-        self.quit_button = tk.Button(frame, text="Quit", **self.optiondisplay)
         self.canvas4.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         self.canvas5.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
-        self.quit_button.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+        return frame
+
+    def text_frame(self):
+        """Create a frame for description text and quit button"""
+        frame = tk.Frame(self)
+        self.quit_button = tk.Button(frame, text="Quit", **self.optiondisplay)
+        description = tk.Label(
+            frame, text="In motor show or in car showroom, there are some situations that customer wants to see cars before test drive or buy. \n It will be a good option if customers can see overall capabilities and designs for each car model in interested brand. \n Moreover, customers may want to specify about number of doors for hanging out with family or going with few people. \n Some customers may want to know about aspiration of the car which has turbo or not. \n For this situation, we simulate that this place is Honda car showroom. \n Customers may want to know about efficiency of Honda cars and they may want to know about length, width and height of cars.", **self.optiondisplay2)
+        description.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
+        self.quit_button.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
         self.quit_button.bind("<Button>", self.quit_handler)
-        # self.canvas3.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
         return frame
 
     def setup_graph(self):
@@ -111,7 +120,7 @@ class CarStoryGUI(tk.Toplevel):
 
     def quit_handler(self, event=tk.Event):
         """Quit the program"""
-        self.quit()
+        self.destroy()
 
     def run(self):
         """Run the program"""

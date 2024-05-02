@@ -10,7 +10,7 @@ class CarGraph:
         self.car = Car()
         self.c_df = self.car.current_df
         self.brand = ""
-        self.figsize = (2, 2)
+        self.figsize = (1, 2)
 
     def car_category(self, brand, asp, num_door, fueltype, carbody):
         """Find car in giving categories"""
