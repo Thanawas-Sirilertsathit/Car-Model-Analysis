@@ -1,4 +1,3 @@
-# To be added
 import tkinter as tk
 from tkinter import ttk
 import seaborn as sns
