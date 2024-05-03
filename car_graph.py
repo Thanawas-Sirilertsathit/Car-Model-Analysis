@@ -12,6 +12,10 @@ class CarGraph:
         self.brand = ""
         self.figsize = (1, 2)
 
+    def set_size(self, size):
+        """Set new figure size of graphs"""
+        self.figsize = size
+
     def car_category(self, brand, asp, num_door, fueltype, carbody):
         """Find car in giving categories"""
         if brand == "":

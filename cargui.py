@@ -33,6 +33,7 @@ class CarGUI(tk.Tk):
         self.optiondisplay2 = {"padx": 2, "pady": 2, "font": (
             "Arial", 12), "background": "orange", "foreground": "purple"}
         mixer.init()
+        self.car_graph.set_size((2, 3))
         self.init_components()
 
     def play_sound_error(self):

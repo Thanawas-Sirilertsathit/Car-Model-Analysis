@@ -4,7 +4,7 @@ import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from car import Car, car_subcategory
+from car import Car
 from car_graph import CarGraph
 
 
