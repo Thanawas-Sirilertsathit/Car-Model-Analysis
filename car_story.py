@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from car import Car
 from car_graph import CarGraph
+from car_describe import describe
 
 
 class CarStoryGUI(tk.Toplevel):
@@ -86,7 +87,7 @@ class CarStoryGUI(tk.Toplevel):
         return frame
 
     def canvas_frame_bottom(self):
-        """Create a canvas frame contains two canvas"""
+        """Create a canvas frame contains three canvas"""
         frame = tk.Frame(self)
         self.canvas4 = tk.Canvas(frame, bg="white")
         self.canvas5 = tk.Canvas(frame, bg="white")
@@ -98,12 +99,24 @@ class CarStoryGUI(tk.Toplevel):
         """Create a frame for description text and quit button"""
         frame = tk.Frame(self)
         self.quit_button = tk.Button(frame, text="Quit", **self.optiondisplay)
-        description = tk.Label(
-            frame, text="In motor show or in car showroom, there are some situations that customer wants to see cars before test drive or buy. \n It will be a good option if customers can see overall capabilities and designs for each car model in interested brand. \n Moreover, customers may want to specify about number of doors for hanging out with family or going with few people. \n Some customers may want to know about aspiration of the car which has turbo or not. \n For this situation, we simulate that this place is Honda car showroom. \n Customers may want to know about efficiency of Honda cars and they may want to know about length, width and height of cars.", **self.optiondisplay2)
-        description.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
+        self.labelframe = tk.LabelFrame(
+            frame, text="Descriptive Statistics", bg="white", width=192, height=96)
+        # description = tk.Label(
+        # frame, text="In motor show or in car showroom, there are some situations that customer wants to see cars before test drive or buy. \n It will be a good option if customers can see overall capabilities and designs for each car model in interested brand. \n Moreover, customers may want to specify about number of doors for hanging out with family or going with few people. \n Some customers may want to know about aspiration of the car which has turbo or not. \n For this situation, we simulate that this place is Honda car showroom. \n Customers may want to know about efficiency of Honda cars and they may want to know about length, width and height of cars.", **self.optiondisplay2)
+        # description.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
         self.quit_button.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
         self.quit_button.bind("<Button>", self.quit_handler)
+        self.labelframe.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
         return frame
+
+    def display_statistics(self):
+        des = describe(self.car_graph.c_df)
+        des = des.to_string()
+        statistics_text = tk.Text(
+            self.labelframe, wrap=tk.WORD, **self.optiondisplay2)
+        statistics_text.insert(tk.END, des)
+        statistics_text.config(state=tk.DISABLED)
+        statistics_text.pack(expand=True, fill=tk.BOTH)
 
     def setup_graph(self):
         self.car_graph.car_category(
@@ -116,6 +129,7 @@ class CarStoryGUI(tk.Toplevel):
         self.display_graph(self.car_graph.price_hist(), self.canvas3)
         self.display_graph(self.car_graph.bar_horsepower(), self.canvas4)
         self.display_graph(self.car_graph.city_mpg_graph(), self.canvas5)
+        self.display_statistics()
 
     def quit_handler(self, event=tk.Event):
         """Quit the program"""
