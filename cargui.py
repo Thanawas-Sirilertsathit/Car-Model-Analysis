@@ -14,14 +14,14 @@ from car_story import CarStoryGUI
 class CarGUI(tk.Tk):
     """Graphical user interface of Car model analysis"""
 
-    def __init__(self, car: Car, controller):
+    def __init__(self, car: Car, controller, cargraph):
         """Initialize components and variables"""
         super().__init__()
         self.progress_bar = None
         self.corr_coef = -999
         self.car = car
         self.stat_text = None
-        self.car_graph = CarGraph()
+        self.car_graph = cargraph
         self.controller = controller
         self.title("Car Model Analysis")
         self.brand_var = tk.StringVar()

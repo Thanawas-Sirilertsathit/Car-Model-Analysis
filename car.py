@@ -70,27 +70,27 @@ class Car:
         else:
             raise ValueError("Aspiration is not Default, Standard or Turbo")
 
-    def door_filter(self, asp):
+    def door_filter(self, num_door):
         """Filter current dataframe using door number and output the current dataframe"""
-        if asp == "Default":
+        if num_door == "Default":
             return self.current_df
-        elif asp == "2 doors" or asp == 2:
+        elif num_door == "2 doors" or num_door == 2:
             self.current_df = self.current_df[self.current_df["doornumber"] == "two"]
             return self.current_df
-        elif asp == "4 doors" or asp == 4:
+        elif num_door == "4 doors" or num_door == 4:
             self.current_df = self.current_df[self.current_df["doornumber"] == "four"]
             return self.current_df
         else:
             raise ValueError("Door number is not Default, 2 doors or 4 doors")
 
-    def fuel_filter(self, asp):
+    def fuel_filter(self, fueltype):
         """Filter current dataframe using fuel type and output the current dataframe"""
-        if asp == "Default":
+        if fueltype == "Default":
             return self.current_df
-        elif asp == "Gas" or asp == "gas":
+        elif fueltype == "Gas" or fueltype == "gas":
             self.current_df = self.current_df[self.current_df["fueltype"] == "gas"]
             return self.current_df
-        elif asp == "Diesel" or asp == "diesel":
+        elif fueltype == "Diesel" or fueltype == "diesel":
             self.current_df = self.current_df[self.current_df["fueltype"] == "diesel"]
             return self.current_df
         else:
