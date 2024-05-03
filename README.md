@@ -30,7 +30,7 @@ Storytelling page
 - The story button will lead the user to another UI called Storytelling page.  
 
 # UML class diagram
-[UML class diagram](https://media.discordapp.net/attachments/1015464234664067122/1235938870177300514/Diagrams-6.jpg?ex=66363145&is=6634dfc5&hm=1c3424bb78ac3dbb1e197fd8a7c582669afdb3c76768b09dcd200c4ec615e953&=&format=webp&width=550&height=344)
+- [UML class diagram](https://media.discordapp.net/attachments/1015464234664067122/1235938870177300514/Diagrams-6.jpg?ex=66363145&is=6634dfc5&hm=1c3424bb78ac3dbb1e197fd8a7c582669afdb3c76768b09dcd200c4ec615e953&=&format=webp&width=550&height=344)
 
 # Sequence diagram
 - [Sequence diagram for quit and story button](https://media.discordapp.net/attachments/1015464234664067122/1235938868100988968/Diagrams-5.jpg?ex=66363144&is=6634dfc4&hm=d66d0b529e873e812464826cbb5dfde3551175788ae62660998029f76338c6a3&=&format=webp&width=748&height=467)
