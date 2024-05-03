@@ -4,10 +4,12 @@ This program will provide the users with insight into private fuel cars to compa
 Users can create graphs in this program to find out the distribution of each attribute for each car model.
 
 # Main features
-- This program can be interacted by users via buttons and comboboxes.
-- This program will create graph depends on the button that is pressed.
-- The program also has data storytelling page which can be navigated by the story button.
-- The program has progress bar running when creating graph and opening storytelling page.
+- Has a default graph when the program starts.
+- Allow users to select categories before submitting.
+- After submitting categories, display graphs according to selections.
+- To submit categories and display graphs or statistics, press one of seven buttons at the bottom of the menu bar.
+- Contain a page for storytelling.
+
 
 # Description
   The program will let users select the categories. After that, the program will present the graph of the selected attribute. One of these is city mpg, highway mpg and stroke for showing correlation (This correlation will show the optimization of the car engine).
