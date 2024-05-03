@@ -9,17 +9,28 @@ Users can create graphs in this program to find out the distribution of each att
 - The program also has data storytelling page which can be navigated by the story button.
 - The program has progress bar running when creating graph and opening storytelling page.
 
-# Installation and how to use
-Requirements
+# Description
+  The program will let users select the categories. After that, the program will present the graph of the selected attribute. One of these is city mpg, highway mpg and stroke for showing correlation (This correlation will show the optimization of the car engine).
+
+  Mainly, this program will let users select the car body, number of doors, fuel type, brand and aspiration to create the graph. This program will let users select attributes to create the graph. First one is the dimensions of the car. Second one is price. Third one is horsepower. Fourth one is mpg scores and kpl scores comparing to stroke. Last one is the peak round per minute.
+
+# Screenshots
+To be added
+
+# Reference of data
+- [Reference](https://www.kaggle.com/datasets/goyalshalini93/car-data)
+
+# Installation
+Requirements (Having items below installed)
 - Python version 3.9 or higher version
 - Tkinter library
-- Matplotlib module
-- Seaborn module
-- Pandas module
-- Pygame module
-- Numpy module
+- Matplotlib module version 3.8.4
+- Seaborn module version 0.12.3
+- Pandas module version 1.5.3
+- Pygame module version 2.5.2
+- Numpy module version 1.24.1
 
-How to run the program
+# How to run the program
 - Make sure you have installed the required modules
 - Run the file car_main.py
 - The program will show up with the default graph which is price boxplot.
