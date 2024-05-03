@@ -338,7 +338,9 @@ class CarGUI(tk.Tk):
 
     def quit_handler(self, event=tk.Event):
         """Quit the program include the storytelling page"""
-        self.winfo_toplevel().destroy()
+        self.show_progress_bar()
+        self.after(10000, self.hide_progress_bar)
+        exit()
 
     def run(self):
         """Run the program"""
