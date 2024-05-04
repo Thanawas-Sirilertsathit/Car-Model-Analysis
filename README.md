@@ -17,7 +17,16 @@ Users can create graphs in this program to find out the distribution of each att
   Mainly, this program will let users select the car body, number of doors, fuel type, brand and aspiration to create the graph. This program will let users select attributes to create the graph. First one is the dimensions of the car. Second one is price. Third one is horsepower. Fourth one is mpg scores and km/l scores compared to stroke. Last one is the peak round per minute.
 
 # Screenshots
-To be added
+| Project information and documents |
+| ------------- |
+| [Default page](https://media.discordapp.net/attachments/1015464234664067122/1236139411087954022/image.png?ex=6636ec09&is=66359a89&hm=cd460ceb7cd7837ed0e141f0fa7df85c74fb6fab188fcc0a8a7fbb663a21b743&=&format=webp&quality=lossless) |
+| [Price histogram](https://media.discordapp.net/attachments/1015464234664067122/1236139862676078622/image.png?ex=6636ec75&is=66359af5&hm=ea511bfb8a9ae73666b4c05eded3c4c70c4c9dd7f7d83b2502894bab041aad50&=&format=webp&quality=lossless) |
+| [Price boxplot](https://media.discordapp.net/attachments/1015464234664067122/1236139763212222464/image.png?ex=6636ec5d&is=66359add&hm=ad11a0a4e939ed3afd2dcb48579e8ccd0add44514191433370290e66db2288c6&=&format=webp&quality=lossless) |
+| [Horsepower bar graph](https://media.discordapp.net/attachments/1015464234664067122/1236140392538443898/image.png?ex=6636ecf3&is=66359b73&hm=fd105ae17bdedaf6ad29bde7afcc899f100150a37b07257879d073871c126261&=&format=webp&quality=lossless&width=550&height=251) |
+| [Stackbar chart for car dimensions](https://media.discordapp.net/attachments/1015464234664067122/1236140199596261477/image.png?ex=6636ecc5&is=66359b45&hm=e3f89f26eaa9ebbb0932c75f973a8b46dc12a8a9d122e243eb559978cfd37daf&=&format=webp&quality=lossless&width=550&height=256) |
+| [Scatter plot for citympg and stroke](https://media.discordapp.net/attachments/1015464234664067122/1236140528853323787/image.png?ex=6636ed14&is=66359b94&hm=d3f24ca914202ad8d11e4bec1f986b35b189e27e7a2fb34cf3a9dac34d39bdd1&=&format=webp&quality=lossless) |
+| [Statistics page](https://media.discordapp.net/attachments/1015464234664067122/1236140798114926663/image.png?ex=6636ed54&is=66359bd4&hm=9e5ffa6a1898519910940a82b3e71085eb1226282bcad562afce0719cb798388&=&format=webp&quality=lossless&width=550&height=284) |
+| [Storytelling page](https://media.discordapp.net/attachments/1015464234664067122/1236140709275500615/image.png?ex=6636ed3f&is=66359bbf&hm=f3440fcc3032dad353ea134cafa6141f3faca99777904b4667698845a338662d&=&format=webp&quality=lossless&width=550&height=288) |
 
 # Reference of data
 - [Reference](https://www.kaggle.com/datasets/goyalshalini93/car-data)
