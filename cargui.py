@@ -15,7 +15,12 @@ class CarGUI(tk.Tk):
     """Graphical user interface of Car model analysis"""
 
     def __init__(self, car: Car, controller, cargraph):
-        """Initialize components and variables"""
+        """
+        Initialize components and variables
+        : param car : Car : Car object
+        : param controller : CarController : CarController object
+        : param cargraph : CarGraph : CarGraph object
+        """
         super().__init__()
         self.progress_bar = None
         self.corr_coef = -999
@@ -74,7 +79,10 @@ class CarGUI(tk.Tk):
         self.carbody_list.insert(0, "")
 
     def display_graph(self, graph):
-        """Display the graph in the canvas"""
+        """
+        Display the graph in the canvas
+        : param graph : matplotlib figure : graph that you want to be displayed
+        """
         self.clear_canvas()
         graph_canvas = FigureCanvasTkAgg(graph, master=self.canvas)
         graph_canvas.draw()
@@ -96,7 +104,10 @@ class CarGUI(tk.Tk):
         self.hide_progress_bar()
 
     def correlation_frame(self):
-        """Create correlation frame"""
+        """
+        Create correlation frame
+        : param frame : tk.Frame() : Frame tkinter
+        """
         frame = tk.Frame()
         self.correlation_label = tk.Label(
             frame, text="", **self.optiondisplay1)
@@ -104,7 +115,10 @@ class CarGUI(tk.Tk):
         return frame
 
     def progress_bar_frame(self):
-        """Create progress bar frame"""
+        """
+        Create progress bar frame
+        : param frame : tk.Frame() : Frame tkinter
+        """
         frame = tk.Frame()
         self.progress_bar = ttk.Progressbar(
             frame, orient="horizontal", length=200, mode="determinate")
@@ -141,7 +155,10 @@ class CarGUI(tk.Tk):
             self.stat_text = None
 
     def combobox_category_frame(self):
-        """A frame that contains comboboxes"""
+        """
+        A frame that contains comboboxes
+        : param frame : tk.Frame() : Frame tkinter
+        """
         frame = tk.Frame()
         brand_l = tk.Label(frame, text="Brand : ",
                            **self.optiondisplay1)
@@ -169,7 +186,10 @@ class CarGUI(tk.Tk):
         return frame
 
     def category_button_frame(self):
-        """A frame that contains category choice buttons"""
+        """
+        A frame that contains category choice buttons
+        : param frame : tk.Frame() : Frame tkinter
+        """
         frame = tk.Frame()
         self.fueltype_b = tk.Button(
             frame, text="Default", **self.optiondisplay2)
@@ -195,7 +215,10 @@ class CarGUI(tk.Tk):
         return frame
 
     def graph_button_frame(self):
-        """A frame that contains graph buttons"""
+        """
+        A frame that contains graph buttons
+        : param frame : tk.Frame() : Frame tkinter
+        """
         frame = tk.Frame()
         dimensions = tk.Button(frame, text="Dimensions", **self.optiondisplay)
         horsepower = tk.Button(frame, text="Horsepower", **self.optiondisplay)
@@ -223,6 +246,10 @@ class CarGUI(tk.Tk):
         return frame
 
     def canvas_frame(self):
+        """
+        Create canvas frame
+        : param frame : tk.Frame() : Frame tkinter
+        """
         frame = tk.Frame()
         self.canvas = tk.Canvas(frame, bg="white")
         self.canvas.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
@@ -358,7 +385,15 @@ class CarController:
         self.current_df = self.car.current_df
 
     def select(self, brand, aspiration, door_num, fueltype, car_body):
-        """MVC design (Delegate from View or CarGUI)"""
+        """
+        MVC design (Delegate from View or CarGUI)
+        : param brand : str : (brand)
+        : param aspiration : str : (Default / Standard / Turbo)
+        : param door_num : str : (Default / 2 doors / 4 doors)
+        : param fueltype : str : (Default / Gas / Diesel)
+        : param car_body : str :(Car body style)
+        : return current_df : dataframe : filtered dataframe
+        """
         self.current_df = car_subcategory(
             brand, aspiration, door_num, fueltype, car_body)
         self.car_graph.brand = brand
@@ -368,7 +403,11 @@ class CarController:
             return self.current_df
 
     def graph(self, text):
-        """Return graph and update canvas"""
+        """
+        Return graph and update canvas
+        : param text : str : input graph type
+        : return : matplotlib figure : graph depends on text parameter
+        """
         self.car_graph.c_df = self.current_df
         try:
             if text == "Dimensions":
@@ -412,9 +451,14 @@ class CarController:
                 return self.car_graph.highway_kpl_graph()
 
     def stat(self):
+        """
+        send out statistics
+        : return : statistics : descriptive statistics
+        """
         return describe(self.current_df)
 
     def story(self):
+        """Storytelling page calling"""
         car = Car()
         story_gui = CarStoryGUI(car)
         story_gui.run()

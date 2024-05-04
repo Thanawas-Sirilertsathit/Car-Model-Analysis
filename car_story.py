@@ -13,7 +13,10 @@ class CarStoryGUI(tk.Toplevel):
     """Graphical user interface of Car storytelling """
 
     def __init__(self, car: Car):
-        """Initialize components and variables"""
+        """
+        Initialize components and variables
+        : param car : Car : Car object
+        """
         super().__init__()
         self.corr_coef = -999
         self.car = car
@@ -42,7 +45,11 @@ class CarStoryGUI(tk.Toplevel):
         self.setup_graph()
 
     def display_graph(self, graph, canvas):
-        """Display the graph in the canvas"""
+        """
+        Display the graph in the canvas
+        : param graph : matplotlib figure : graph that you want it to be displayed
+        : param canvas : tk.Canvas() : canvas that you want graph to be in
+        """
         self.clear_canvas(canvas)
         graph_canvas = FigureCanvasTkAgg(graph, master=canvas)
         graph_canvas.draw()
@@ -63,7 +70,10 @@ class CarStoryGUI(tk.Toplevel):
             self.correlation_label.config(text="")
 
     def correlation_frame(self):
-        """Create correlation frame"""
+        """
+        Create correlation frame
+        : param frame : tk.Frame() : Frame tkinter
+        """
         frame = tk.Frame(self)
         self.correlation_label = tk.Label(
             frame, text="", **self.optiondisplay1)
@@ -76,7 +86,10 @@ class CarStoryGUI(tk.Toplevel):
             widget.destroy()
 
     def canvas_frame_top(self):
-        """Create a canvas frame contains three canvas"""
+        """
+        Create a canvas frame contains three canvas
+        : param frame : tk.Frame() : Frame tkinter
+        """
         frame = tk.Frame(self)
         self.canvas1 = tk.Canvas(frame, bg="white")
         self.canvas2 = tk.Canvas(frame, bg="white")
@@ -87,7 +100,10 @@ class CarStoryGUI(tk.Toplevel):
         return frame
 
     def canvas_frame_bottom(self):
-        """Create a canvas frame contains three canvas"""
+        """
+        Create a canvas frame contains three canvas
+        : param frame : tk.Frame() : Frame tkinter
+        """
         frame = tk.Frame(self)
         self.canvas4 = tk.Canvas(frame, bg="white")
         self.canvas5 = tk.Canvas(frame, bg="white")
@@ -110,6 +126,7 @@ class CarStoryGUI(tk.Toplevel):
         return frame
 
     def display_statistics(self):
+        """Find out statistics and display"""
         des = describe(self.car_graph.c_df)
         des = des.to_string()
         statistics_text = tk.Text(
@@ -119,6 +136,7 @@ class CarStoryGUI(tk.Toplevel):
         statistics_text.pack(expand=True, fill=tk.BOTH)
 
     def setup_graph(self):
+        """Setting up graphs in frames"""
         self.car_graph.car_category(
             "Honda", "Default", "Default", "Default", "Default")
         self.corr_coef = np.corrcoef(

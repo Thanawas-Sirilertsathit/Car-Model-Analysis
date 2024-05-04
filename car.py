@@ -30,7 +30,11 @@ class Car:
         self.current_df = self.df.copy()
 
     def find_brand(self, brand):
-        """Filter the dataframe by using brand and output as current dataframe"""
+        """
+        Filter the dataframe by using brand and output as current dataframe
+        : param brand : str : Brand of car model you want to search for
+        : return current_df : dataframe : filtered dataframe
+        """
         brand1 = brand.lower()
         if brand1 in self.brand_list:
             carname = self.df["CarName"].str.lower()
@@ -58,7 +62,11 @@ class Car:
         self.brand_list.append("")
 
     def aspiration_filter(self, asp):
-        """Filter current dataframe using aspiration and output the current dataframe"""
+        """
+        Filter current dataframe using aspiration and output the current dataframe
+        : param asp : str : aspiration of car model you want to search for
+        : return current_df : dataframe : filtered dataframe
+        """
         if asp == "Default":
             return self.current_df
         elif asp == "Standard":
@@ -71,7 +79,11 @@ class Car:
             raise ValueError("Aspiration is not Default, Standard or Turbo")
 
     def door_filter(self, num_door):
-        """Filter current dataframe using door number and output the current dataframe"""
+        """
+        Filter current dataframe using door number and output the current dataframe
+        : param num_door : str : number of doors of car model you want to search for
+        : return current_df : dataframe : filtered dataframe
+        """
         if num_door == "Default":
             return self.current_df
         elif num_door == "2 doors" or num_door == 2:
@@ -84,7 +96,11 @@ class Car:
             raise ValueError("Door number is not Default, 2 doors or 4 doors")
 
     def fuel_filter(self, fueltype):
-        """Filter current dataframe using fuel type and output the current dataframe"""
+        """
+        Filter current dataframe using fuel type and output the current dataframe
+        : param fueltype : str : fuel type of car model you want to search for
+        : return current_df : dataframe : filtered dataframe
+        """
         if fueltype == "Default":
             return self.current_df
         elif fueltype == "Gas" or fueltype == "gas":
@@ -97,7 +113,11 @@ class Car:
             raise ValueError("Fuel type is not Default, gas or diesel")
 
     def car_body_filter(self, carbody):
-        """Filter current dataframe using car body and output the current dataframe"""
+        """
+        Filter current dataframe using car body and output the current dataframe
+        : param carbody : str : car body of car model you want to search for
+        : return current_df : dataframe : filtered dataframe
+        """
         carbody = carbody.lower()
         self.carbody_list = self.df["carbody"].unique()
         if carbody in self.carbody_list:
@@ -111,12 +131,12 @@ class Car:
 
 def car_subcategory(brand, aspiration, door_num, fueltype, car_body):
     """Function to filter multiple options of car
-    param : brand (brand)
-    param : aspiration (Default / Standard / Turbo)
-    param : door_num (Default / 2 doors / 4 doors)
-    param : fueltype (Default / Gas / Diesel)
-    param : car_body (Car body style)
-    return : carbody (last filter option)
+    : param brand : str : (brand)
+    : param aspiration : str : (Default / Standard / Turbo)
+    : param door_num : str : (Default / 2 doors / 4 doors)
+    : param fueltype : str : (Default / Gas / Diesel)
+    : param car_body : str :(Car body style)
+    : return carbody : dataframe : (last filtered dataframe)
     """
     car = Car()
     car_brand = car.find_brand(brand)

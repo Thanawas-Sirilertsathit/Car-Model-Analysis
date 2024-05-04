@@ -13,11 +13,21 @@ class CarGraph:
         self.figsize = (1, 2)
 
     def set_size(self, size):
-        """Set new figure size of graphs"""
+        """
+        Set new figure size of graphs
+        : param size : tuple : size of the figure that you want to set
+        """
         self.figsize = size
 
     def car_category(self, brand, asp, num_door, fueltype, carbody):
-        """Find car in giving categories"""
+        """
+        Find car in giving categories
+        : param brand : str : (brand)
+        : param asp : str : (Default / Standard / Turbo)
+        : param num_door : str : (Default / 2 doors / 4 doors)
+        : param fueltype : str : (Default / Gas / Diesel)
+        : param carbody : str :(Car body style)
+        """
         if brand == "":
             self.brand = ""
         else:
@@ -30,7 +40,10 @@ class CarGraph:
             plt.close(self.ax.figure)
 
     def city_mpg_graph(self):
-        """Create citympg and stroke correlation"""
+        """
+        Create citympg and stroke correlation
+        : return fig : graph figure
+        """
         fig, ax = plt.subplots(figsize=self.figsize)
         sns.scatterplot(data=self.c_df, x="stroke", y="citympg", ax=ax)
         ax.set(xlabel='Stroke (Litre)', ylabel='City mpg')
@@ -39,7 +52,10 @@ class CarGraph:
         return fig
 
     def city_kpl_graph(self):
-        """Create citykpl and stroke correlation"""
+        """
+        Create citykpl and stroke correlation
+        : return fig : graph figure
+        """
         fig, ax = plt.subplots(figsize=self.figsize)
         sns.scatterplot(data=self.c_df, x="stroke", y="citykpl", ax=ax)
         ax.set(xlabel='Stroke (Litre)', ylabel='City kpl')
@@ -48,7 +64,10 @@ class CarGraph:
         return fig
 
     def highway_mpg_graph(self):
-        """Create highwaympg and stroke correlation"""
+        """
+        Create highwaympg and stroke correlation
+        : return fig : graph figure
+        """
         fig, ax = plt.subplots(figsize=self.figsize)
         sns.scatterplot(data=self.c_df, x="stroke", y="highwaympg", ax=ax)
         ax.set(xlabel='Stroke (Litre)', ylabel='Highway mpg')
@@ -57,7 +76,10 @@ class CarGraph:
         return fig
 
     def highway_kpl_graph(self):
-        """Create highwaykpl and stroke correlation"""
+        """
+        Create highwaykpl and stroke correlation
+        : return fig : graph figure
+        """
         fig, ax = plt.subplots(figsize=self.figsize)
         sns.scatterplot(data=self.c_df, x="stroke", y="highwaykpl", ax=ax)
         ax.set(xlabel='Stroke (Litre)', ylabel='Highway kpl')
@@ -66,7 +88,10 @@ class CarGraph:
         return fig
 
     def price_hist(self):
-        """Create histogram for price"""
+        """
+        Create histogram for price
+        : return fig : graph figure
+        """
         fig, ax = plt.subplots(figsize=self.figsize)
         ax.hist(self.c_df["price"], color="skyblue")
         ax.set(xlabel='Price ($)', ylabel='Frequency')
@@ -74,14 +99,20 @@ class CarGraph:
         return fig
 
     def price_box(self):
-        """Create boxplot for price"""
+        """
+        Create boxplot for price
+        : return fig : graph figure
+        """
         fig, ax = plt.subplots(figsize=self.figsize)
         sns.boxplot(x='price', data=self.c_df, ax=ax, color="salmon")
         ax.set_title(f'Distribution of {self.brand} car price')
         return fig
 
     def pie_rpm(self):
-        """Create peak rpm pie chart"""
+        """
+        Create peak rpm pie chart
+        : return fig : graph figure
+        """
         color_arr = ['r', 'b', 'c', 'm', 'springgreen', 'g', 'orange', 'navy']
         peakrpm = self.c_df["peakrpm"].unique()
         x = self.c_df.groupby(["peakrpm"]).count()
@@ -94,7 +125,10 @@ class CarGraph:
         return fig
 
     def bar_horsepower(self):
-        """Create bar chart for horsepower"""
+        """
+        Create bar chart for horsepower
+        : return fig : graph figure
+        """
         fig, ax = plt.subplots(figsize=self.figsize)
         x = self.c_df["horsepower"]
         y = self.c_df["CarName"]
@@ -107,7 +141,10 @@ class CarGraph:
         return fig
 
     def stackbar_dimensions(self):
-        """Create stack bar chart for dimensions"""
+        """
+        Create stack bar chart for dimensions
+        : return fig : graph figure
+        """
         dimensions_agg = self.c_df.groupby(["CarName"]).agg(carwidth=(
             "carwidth", "mean"), carlength=("carlength", "mean"), carheight=("carheight", "mean"))
         fig, ax = plt.subplots(figsize=self.figsize)
