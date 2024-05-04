@@ -17,7 +17,7 @@ Users can create graphs in this program to find out the distribution of each att
   Mainly, this program will let users select the car body, number of doors, fuel type, brand and aspiration to create the graph. This program will let users select attributes to create the graph. First one is the dimensions of the car. Second one is price. Third one is horsepower. Fourth one is mpg scores and km/l scores compared to stroke. Last one is the peak round per minute.
 
 # Screenshots
-| Project information and documents |
+| Screenshot for specific page in program |
 | ------------- |
 | [Default page](https://media.discordapp.net/attachments/1015464234664067122/1236139411087954022/image.png?ex=6636ec09&is=66359a89&hm=cd460ceb7cd7837ed0e141f0fa7df85c74fb6fab188fcc0a8a7fbb663a21b743&=&format=webp&quality=lossless) |
 | [Price histogram](https://media.discordapp.net/attachments/1015464234664067122/1236139862676078622/image.png?ex=6636ec75&is=66359af5&hm=ea511bfb8a9ae73666b4c05eded3c4c70c4c9dd7f7d83b2502894bab041aad50&=&format=webp&quality=lossless) |
