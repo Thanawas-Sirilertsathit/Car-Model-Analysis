@@ -67,7 +67,7 @@ class CarGraph:
 
     def price_hist(self):
         """Create histogram for price"""
-        fig, ax = plt.subplots(figsize=self.figsize)  # Create a new figure
+        fig, ax = plt.subplots(figsize=self.figsize)
         ax.hist(self.c_df["price"], color="skyblue")
         ax.set(xlabel='Price ($)', ylabel='Frequency')
         ax.set_title(f'Histogram of {self.brand} car price')
@@ -75,7 +75,7 @@ class CarGraph:
 
     def price_box(self):
         """Create boxplot for price"""
-        fig, ax = plt.subplots(figsize=self.figsize)  # Create a new figure
+        fig, ax = plt.subplots(figsize=self.figsize)
         sns.boxplot(x='price', data=self.c_df, ax=ax, color="salmon")
         ax.set_title(f'Distribution of {self.brand} car price')
         return fig
