@@ -22,6 +22,7 @@ class CarGUI(tk.Tk):
         : param cargraph : CarGraph : CarGraph object
         """
         super().__init__()
+        self.protocol("WM_DELETE_WINDOW", self.quit_handler)
         self.progress_bar = None
         self.corr_coef = -999
         self.car = car
