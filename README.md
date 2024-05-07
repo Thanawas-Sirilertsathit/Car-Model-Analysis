@@ -24,17 +24,17 @@ Users can create graphs in this program to find out the distribution of each att
 
 # Installation
 Run these commands respectively
-Clone github repository <br \>
+Clone github repository <br />
 - **git clone https://github.com/Thanawas-Sirilertsathit/Car-Model-Analysis.git**
-Change directory to Car-Model-Analysis <br \>
+Change directory to Car-Model-Analysis <br />
 - **cd Car-Model-Analysis**
-Look for preview tag <br \>
+Look for preview tag <br />
 - **git checkout preview**
-Create new virtual environment <br \>
+Create new virtual environment <br />
 - **python -m venv env**
-Install required modules <br \>
+Install required modules <br />
 - **pip install -r requirements.txt**
-Run car_main file <br \>
+Run car_main file <br />
 - **python car_main.py**
 
 # How to run the program
