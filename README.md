@@ -23,14 +23,13 @@ Users can create graphs in this program to find out the distribution of each att
 - [Reference](https://www.kaggle.com/datasets/goyalshalini93/car-data)
 
 # Installation
-Requirements (Having items below installed)
-- Python version 3.9 or higher version
-- Tkinter library
-- Matplotlib module version 3.8.4
-- Seaborn module version 0.12.3
-- Pandas module version 1.5.3
-- Pygame module version 2.5.2
-- Numpy module version 1.24.1
+Run these commands respectively
+- 'git clone https://github.com/Thanawas-Sirilertsathit/Car-Model-Analysis.git'
+- 'cd Car-Model-Analysis'
+- 'git checkout preview'
+- 'python -m venv env'
+- 'pip install -r requirements.txt'
+- 'python car_main.py'
 
 # How to run the program
 - Make sure you have installed the required modules
