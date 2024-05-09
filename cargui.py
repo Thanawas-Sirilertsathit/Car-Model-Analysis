@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from car import Car, car_subcategory
 from car_graph import CarGraph
-from pygame import mixer
 from car_describe import describe
 from car_story import CarStoryGUI
 
@@ -38,14 +37,8 @@ class CarGUI(tk.Tk):
             "Arial", 12), "background": "blue", "foreground": "pink"}
         self.optiondisplay2 = {"padx": 2, "pady": 2, "font": (
             "Arial", 12), "background": "orange", "foreground": "purple"}
-        mixer.init()
         self.car_graph.set_size((2, 3))
         self.init_components()
-
-    def play_sound_error(self):
-        """Playing sound when dataset is empty or event handler receive Error return from controller"""
-        mixer.music.load("Error.mp3")  # to be added
-        mixer.music.play()
 
     def default_graph(self):
         """Create a default graph"""
@@ -336,26 +329,12 @@ class CarGUI(tk.Tk):
                 self.numdoor_b.config(text="Default")
         cdf = self.controller.select(
             self.brand_var.get(), self.aspiration_b["text"], self.numdoor_b["text"], self.fueltype_b["text"], self.carbody_var.get())
-        if cdf.empty:
-            # print("Dataframe contains nothing")
-            # self.play_sound_error()
-            pass
-        else:
-            # print(cdf)
-            pass
 
     def category_combo_handler(self, event=tk.Event):
         """Event handler for comboboxes"""
         widget = event.widget
         cdf = self.controller.select(
             self.brand_var.get(), self.aspiration_b["text"], self.numdoor_b["text"], self.fueltype_b["text"], self.carbody_var.get())
-        if cdf.empty:
-            # print("Dataframe contains nothing")
-            # self.play_sound_error()
-            pass
-        else:
-            # print(cdf)
-            pass
 
     def story_handler(self, event=tk.Event):
         """Event handler for the story button"""
