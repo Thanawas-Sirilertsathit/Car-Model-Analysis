@@ -32,9 +32,12 @@ Run these commands respectively
 - **git checkout preview**
 4. Create new virtual environment
 - **python -m venv env**
-5. Install required modules
+5. Activate virtual environment
+- env\Scripts\activate (For window)
+- source env/bin/activate (For mac and linux)
+6. Install required modules
 - **pip install -r requirements.txt**
-6. Run car_main file
+7. Run car_main file
 - **python car_main.py**
 
 # How to run the program
