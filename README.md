@@ -36,8 +36,8 @@ Run these commands respectively
 4. Create new virtual environment
 - **python -m venv env**
 5. Activate virtual environment
-- env\Scripts\activate (For window)
-- source env/bin/activate (For mac and linux)
+- **env\Scripts\activate** (For window)
+- **source env/bin/activate** (For mac and linux)
 6. Install required modules
 - **pip install -r requirements.txt**
 7. Run car_main file
