@@ -32,7 +32,7 @@ Run these commands respectively
 2. Change directory to Car-Model-Analysis
 - **cd Car-Model-Analysis**
 3. Look for preview tag
-- **git checkout preview**
+- **git checkout final**
 4. Create new virtual environment
 - **python -m venv env**
 5. Activate virtual environment
