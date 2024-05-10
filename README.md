@@ -17,7 +17,7 @@ Users can create graphs in this program to find out the distribution of each att
   Mainly, this program will let users select the car body, number of doors, fuel type, brand and aspiration to create the graph. This program will let users select attributes to create the graph. First one is the dimensions of the car. Second one is price. Third one is horsepower. Fourth one is mpg scores and km/l scores compared to stroke. Last one is the peak round per minute.
 
 # More information
-- [Wiki page]()
+- [Wiki page](https://github.com/Thanawas-Sirilertsathit/Car-Model-Analysis/wiki)
 
 # Screenshots and Diagrams
 - [Document for screenshots and diagrams](https://docs.google.com/document/d/156f1vVpa-ThG6n808GfuVLRIFvJYINe_oeZpa_gHZdg/edit?usp=sharing)
